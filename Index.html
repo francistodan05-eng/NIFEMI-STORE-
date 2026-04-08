@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <style>
+    /* ================= RESET & VARIABLES ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #1a2c3e;
+  --primary-light: #2c4054;
+  --accent: #b87c4f;
+  --accent-dark: #9b623d;
+  --white: #faf9f8;
+  --gray-light: #f5f3f0;
+  --gray: #6c757d;
+  --dark: #2d2d2d;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+  
+     
+      gg  
+       
+         
+           g pbody {
+  font-family: 'Inter', sans-serif;
+  background: var(--white);
+  color: var(--dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ================= HEADER (VISIBLE DÈS LE DÉPART) ================= */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--white);
+  padding: 20px 0;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.header-scrolled {
+  padding: 12px 0;
+  box-shadow: var(--shadow);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ================= LOGO N + s ================= */
+.logo-classic {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-badge {
+  background: var(--primary);
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+  padding-top: 12px;
+}
+
+.big-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.small-s {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  line-height: 1;
+  align-self: flex-end;
+  margin-bottom: 4px;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 1px;
+}
+
+.brand-store {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.header-scrolled .logo-badge {
+  width: 42px;
+  height: 42px;
+  padding-top: 10px;
+}
+
+.header-scrolled .big-n {
+  font-size: 26px;
+}
+
+.header-scrolled .small-s {
+  font-size: 10px;
+}
+
+.header-scrolled .brand-name {
+  font-size: 17px;
+}
+
+.header-scrolled .brand-store {
+  font-size: 8px;
+}
+
+/* ================= MENU BURGER ================= */
+.menu-toggle {
+  display: block;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--primary);
+  margin: 6px 0;
+  transition: var(--transition);
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
+
+.nav-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 80%;
+  max-width: 350px;
+  height: 100vh;
+  background: var(--white);
+  padding: 100px 40px;
+  transition: 0.4s ease;
+  z-index: 999;
+  box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+}
+
+.nav-menu.active {
+  right: 0;
+}
+
+.nav-list {
+  list-style: none;
+}
+
+.nav-list li {
+  margin-bottom: 30px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 22px;
+  font-weight: 500;
+  transition: var(--transition);
+  display: inline-block;
+}
+
+.nav-link:hover {
+  color: var(--accent);
+  transform: translateX(8px);
+}
+
+.nav-commande {
+  background: var(--accent);
+  color: var(--white) !important;
+  padding: 12px 28px;
+  border-radius: 40px;
+}
+
+.nav-commande:hover {
+  background: var(--accent-dark);
+  transform: translateX(0);
+}
+
+/* ================= ICÔNE PANIER FLOTTANTE ================= */
+.cart-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+}
+
+.cart-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: var(--transition);
+  position: relative;
+  text-decoration: none;
+}
+
+.cart-icon i {
+  font-size: 28px;
+  color: white;
+}
+
+.cart-icon:hover {
+  transform: scale(1.05);
+  background: var(--accent-dark);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #2196F3;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ================= HERO ================= */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 80px;
+}
+
+.hero-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(26, 44, 62, 0.85) 0%, rgba(26, 44, 62, 0.75) 100%);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.hero-text {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 80px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 30px;
+  line-height: 1.2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px;
+}
+
+.hero-typing {
+  display: inline-block;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--accent);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 25px;
+  border-radius: 50px;
+  backdrop-filter: blur(5px);
+}
+
+#typed-text {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 1px;
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  background-color: var(--accent);
+  animation: blink 0.7s infinite;
+  margin-left: 5px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.hero-description {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 40px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--white);
+  border: 2px solid var(--accent);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* ================= PRODUITS ================= */
+.produits {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-subtitle {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+
+.section-description {
+  font-size: 18px;
+  color: var(--gray);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.produits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.produit-card {
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.produit-card.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.produit-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-hover);
+}
+
+.produit-image {
+  position: relative;
+  overflow: hidden;
+  height: 280px;
+}
+
+.produit-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.produit-card:hover .produit-image img {
+  transform: scale(1.05);
+}
+
+.produit-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: var(--accent);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.bientot-badge {
+  background: var(--gray);
+}
+
+.produit-info {
+  padding: 24px;
+}
+
+.produit-info h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.produit-info p {
+  color: var(--gray);
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.produit-prix {
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.btn-produit {
+  display: inline-block;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.btn-produit:hover {
+  color: var(--accent-dark);
+  transform: translateX(5px);
+}
+
+.btn-bientot {
+  color: var(--gray);
+  cursor: default;
+}
+
+.btn-bientot:hover {
+  transform: none;
+  color: var(--gray);
+}
+
+.bientot {
+  opacity: 0.8;
+}
+
+/* ================= À PROPOS ================= */
+.a-propos {
+  padding: 100px 0;
+  background: var(--gray-light);
+}
+
+.a-propos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.a-propos-content {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: 0.6s ease;
+}
+
+.a-propos-content.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.a-propos-content .section-title {
+  font-size: 36px;
+  margin-bottom: 24px;
+}
+
+.a-propos-content p {
+  color: var(--gray);
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.mt-2 {
+  margin-top: 16px;
+}
+
+.valeurs {
+  display: flex;
+  gap: 30px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.valeur {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+.valeur i {
+  font-size: 24px;
+  color: var(--accent);
+}
+
+.a-propos-image {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: 0.6s ease;
+}
+
+.a-propos-image.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.a-propos-image img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: var(--shadow-hover);
+}
+
+/* ================= CONTACT ================= */
+.contact {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.contact-card {
+  background: var(--gray-light);
+  padding: 40px 30px;
+  border-radius: 20px;
+  text-align: center;
+  transition: var(--transition);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.contact-card.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+}
+
+.contact-icon {
+  width: 70px;
+  height: 70px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.contact-icon i {
+  font-size: 28px;
+  color: var(--white);
+}
+
+.contact-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.contact-card p {
+  color: var(--gray);
+  margin-bottom: 0;
+}
+
+/* ================= FOOTER ================= */
+.footer {
+  background: var(--primary);
+  color: var(--white);
+  padding: 60px 0 30px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 30px;
+}
+
+.footer-logo h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.footer-logo p {
+  opacity: 0.7;
+  font-size: 14px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--white);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: var(--transition);
+}
+
+.footer-links a:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.footer-credits {
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.footer-credits p {
+  margin: 5px 0;
+}
+
+.developer-tag {
+  font-style: italic;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* ================= ANIMATIONS ================= */
+.fade-in, .fade-in-left, .fade-in-right {
+  opacity: 0;
+  transition: 0.6s ease;
+}
+
+.fade-in {
+  transform: translateY(30px);
+}
+
+.fade-in-left {
+  transform: translateX(-30px);
+}
+
+.fade-in-right {
+  transform: translateX(30px);
+}
+
+.fade-in.visible, .fade-in-left.visible, .fade-in-right.visible {
+  opacity: 1;
+  transform: translate(0);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (min-width: 992px) {
+  .menu-toggle {
+    display: none;
+  }
+
+  .nav-menu {
+    position: static;
+    width: auto;
+    height: auto;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .nav-list {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .nav-list li {
+    margin-bottom: 0;
+  }
+
+  .nav-link {
+    font-size: 16px;
+  }
+
+  .nav-commande {
+    padding: 10px 24px;
+  }
+}
+
+@media (max-width: 991px) {
+  .hero-title {
+    font-size: 60px;
+  }
+  
+  .hero-typing {
+    font-size: 22px;
+    padding: 8px 20px;
+  }
+  
+  .produits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .a-propos-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+  
+  .valeurs {
+    justify-content: center;
+  }
+  
+  .a-propos-image {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 44px;
+  }
+  
+  .hero-typing {
+    font-size: 18px;
+    padding: 6px 16px;
+  }
+  
+  .hero-description {
+    font-size: 16px;
+    padding: 0 20px;
+  }
+  
+  .produits-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-title {
+    font-size: 32px;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footer-links {
+    justify-content: center;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn {
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+  }
+  
+  .cart-float {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .cart-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .cart-icon i {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 32px;
+  }
+  
+  .hero-typing {
+    font-size: 14px;
+    padding: 4px 12px;
+  }
+  
+  .section-title {
+    font-size: 28px;
+  }
+  
+  .contact-card {
+    padding: 30px 20px;
+  }
+}
+  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NIFEMI STORE - Élégance & Style</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header header-visible">
+  <div class="container">
+    <div class="header-inner">
+      <!-- Logo N + s -->
+      <div class="logo-classic">
+        <div class="logo-badge">
+          <span class="big-n">N</span>
+          <span class="small-s">s</span>
+        </div>
+        <div class="logo-text">
+          <span class="brand-name">NIFEMI</span>
+          <span class="brand-store">STORE</span>
+        </div>
+      </div>
+      
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link">Accueil</a></li>
+          <li><a href="#produits" class="nav-link">Produits</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+          
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- SECTION HERO -->
+  <section id="home" class="hero">
+    <div class="hero-bg-image"></div>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <div class="hero-text text-center">
+        <h1 class="hero-title">NIFEMI STORE</h1>
+        <div class="hero-typing">
+          <span id="typed-text"></span>
+          <span class="cursor">|</span>
+        </div>
+        <p class="hero-description">Découvrez notre collection exclusive de montres, pagnes , vêtements pour enfants et autres. Qualité et style au rendez-vous.</p>
+        <div class="hero-buttons">
+          <a href="#produits" class="btn btn-primary">Découvrir nos produits</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION PRODUITS -->
+  <section id="produits" class="produits">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">Notre collection</span>
+        <h2 class="section-title">Nos produits</h2>
+        <p class="section-description">Des articles soigneusement sélectionnés pour vous</p>
+      </div>
+      
+      <div class="produits-grid">
+        
+        <!-- Montres -->
+        <div class="produit-card fade-in">
+          <div class="produit-image">
+            <img src="images/montres/montre-noir-complet.jpg" alt="Montres" onerror="this.src='images/placeholder.png'">
+            <div class="produit-badge">5 modèles</div>
+          </div>
+          <div class="produit-info">
+            <h3>⌚ Montres</h3>
+            <p>Collection élégante pour homme. 5 modèles disponibles.</p>
+            <div class="produit-prix">À partir de 15 000 FCFA</div>
+            <a href="produits/montres.html" class="btn-produit">Voir les modèles →</a>
+          </div>
+        </div>
+        
+        <!-- Pagnes -->
+        <div class="produit-card fade-in">
+          <div class="produit-image">
+            <img src="images/pagnes/pagne-1.jpg" alt="Pagnes" onerror="this.src='images/placeholder.png'">
+            <div class="produit-badge">11 modèles</div>
+          </div>
+          <div class="produit-info">
+            <h3>👗 Pagnes</h3>
+            <p>Tissus authentiques Chiganvy. 11 modèles disponibles.</p>
+            <div class="produit-prix">Prix sur demande</div>
+            <a href="produits/pagnes.html" class="btn-produit">Voir les modèles →</a>
+          </div>
+        </div>
+        
+        <!-- Vêtements Enfants -->
+        <div class="produit-card fade-in">
+          <div class="produit-image">
+            <img src="images/vetements/vetement-marron.jpg" alt="Vêtements enfants" onerror="this.src='images/placeholder.png'">
+            <div class="produit-badge">4 modèles</div>
+          </div>
+          <div class="produit-info">
+            <h3>👕 Vêtements Enfants</h3>
+            <p>Confortables et stylés pour vos enfants. 4 modèles disponibles.</p>
+            <div class="produit-prix">5 000 FCFA</div>
+            <a href="produits/vetements.html" class="btn-produit">Voir les modèles →</a>
+          </div>
+        </div>
+        
+        <!-- Moulinex (bientôt) -->
+        <div class="produit-card fade-in bientot">
+          <div class="produit-image">
+            <img src="images/placeholder.png" alt="Moulinex">
+            <div class="produit-badge bientot-badge">Bientôt</div>
+          </div>
+          <div class="produit-info">
+            <h3>⚡ Moulinex</h3>
+            <p>Appareils électroménagers de qualité. Arrivage prochainement.</p>
+            <div class="produit-prix">Prix à venir</div>
+            <a href="produits/moulinex.html" class="btn-produit btn-bientot">Bientôt disponible →</a>
+          </div>
+        </div>
+        
+        <!-- Chaussures (bientôt) -->
+        <div class="produit-card fade-in bientot">
+          <div class="produit-image">
+            <img src="images/placeholder.png" alt="Chaussures">
+            <div class="produit-badge bientot-badge">Bientôt</div>
+          </div>
+          <div class="produit-info">
+            <h3>👞 Chaussures</h3>
+            <p>Collection de chaussures pour homme et femme. Arrivage prochainement.</p>
+            <div class="produit-prix">Prix à venir</div>
+            <a href="produits/chaussures.html" class="btn-produit btn-bientot">Bientôt disponible →</a>
+          </div>
+        </div>
+        
+        <!-- Autres articles (bientôt) -->
+        <div class="produit-card fade-in bientot">
+          <div class="produit-image">
+            <img src="images/placeholder.png" alt="Autres articles">
+            <div class="produit-badge bientot-badge">Bientôt</div>
+          </div>
+          <div class="produit-info">
+            <h3>✨ Autres articles</h3>
+            <p>Découvrez bientôt notre nouvelle collection d'articles tendance.</p>
+            <div class="produit-prix">Prix à venir</div>
+            <a href="produits/autres.html" class="btn-produit btn-bientot">Bientôt disponible →</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION À PROPOS -->
+  <section class="a-propos">
+    <div class="container">
+      <div class="a-propos-grid">
+        <div class="a-propos-content fade-in-left">
+          <span class="section-subtitle">À propos</span>
+          <h2 class="section-title">NIFEMI STORE</h2>
+          <p>NIFEMI STORE est votre destination privilégiée pour l'élégance et le style. Nous proposons une sélection soigneusement choisie de montres, pagnes , vêtements pour enfants et autres , alliant qualité, authenticité et tendance.</p>
+          <p class="mt-2">Notre engagement : vous offrir des produits de qualité au meilleur prix, avec un service client à l'écoute.</p>
+          <div class="valeurs">
+            <div class="valeur"><i class="fas fa-gem"></i><span>Qualité</span></div>
+            <div class="valeur"><i class="fas fa-hand-holding-heart"></i><span>Confiance</span></div>
+            <div class="valeur"><i class="fas fa-truck"></i><span>Livraison rapide</span></div>
+          </div>
+        </div>
+        <div class="a-propos-image fade-in-right">
+          <img src="images/placeholder-store.png" alt="NIFEMI STORE">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION CONTACT -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">Contactez-nous</span>
+        <h2 class="section-title">Restons connectés</h2>
+        <p class="section-description">Une question ? Une commande ? N'hésitez pas à nous contacter</p>
+      </div>
+      
+      <div class="contact-grid">
+        <div class="contact-card fade-in">
+          <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+          <h3>Téléphone</h3>
+          <p>+229 01 65 56 70 58</p>
+        </div>
+        
+        <div class="contact-card fade-in">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <h3>Email</h3>
+          <p>mouchfikothsofiano@gmail.com</p>
+        </div>
+        
+        <div class="contact-card fade-in">
+          <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+          <h3>WhatsApp</h3>
+          <p>+229 01 51 35 44 46</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <h3>NIFEMI STORE</h3>
+        <p>L'élégance à portée de main</p>
+      </div>
+      <div class="footer-links">
+        <a href="#home">Accueil</a>
+        <a href="#produits">Produits</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-credits">
+      <p>&copy; 2026 NIFEMI STORE. Tous droits réservés.</p>
+      <p>Conçu par <strong>Carlos TODAN</strong> <span class="developer-tag">(Développeur web)</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ICÔNE PANIER FLOTTANTE -->
+<div class="cart-float" id="cartFloat">
+  <a href="panier.html" class="cart-icon">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="cart-badge" id="cartBadge">0</span>
+  </a>
+</div>
+
+<script src="script.js"></script>
+<script>
+  // Menu burger
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
+  
+  if (menuToggle) {
+    menuToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+    });
+  }
+  
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function() {
+      menuToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+  
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+  
+  // Header scroll effect (visible dès le début)
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 50) {
+      header.classList.add('header-scrolled');
+    } else {
+      header.classList.remove('header-scrolled');
+    }
+  });
+  
+  // Animation fade-in
+  const fadeElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right');
+  function checkFade() {
+    fadeElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        el.classList.add('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', checkFade);
+  window.addEventListener('load', checkFade);
+  
+  // Effet machine à écrire
+  const text = "Bienvenue chez NIFEMI STORE";
+  const typedTextSpan = document.getElementById("typed-text");
+  let index = 0;
+  
+  function typeWriter() {
+    if (index < text.length) {
+      typedTextSpan.innerHTML += text.charAt(index);
+      index++;
+      setTimeout(typeWriter, 80);
+    }
+  }
+  
+  window.addEventListener("load", typeWriter);
+</script>
+<script>
+  // ================= GESTION DU PANIER =================
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// Fonction pour ajouter un produit au panier
+function addToCart(productId, productName, productPrice, productColor, productImage) {
+  const existingItem = cart.find(item => item.id === productId && item.color === productColor);
+  
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({
+      id: productId,
+      name: productName,
+      price: productPrice,
+      color: productColor,
+      image: productImage,
+      quantity: 1
+    });
+  }
+  
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartBadge();
+  return true;
+}
+
+// Fonction pour mettre à jour le badge du panier
+function updateCartBadge() {
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const cartBadge = document.getElementById('cartBadge');
+  if (cartBadge) {
+    cartBadge.textContent = totalItems;
+  }
+}
+
+// Fonction pour récupérer le panier
+function getCart() {
+  return cart;
+}
+
+// Fonction pour vider le panier
+function clearCart() {
+  cart = [];
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartBadge();
+}
+
+// Fonction pour supprimer un article du panier
+function removeFromCart(productId, productColor) {
+  cart = cart.filter(item => !(item.id === productId && item.color === productColor));
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartBadge();
+  return cart;
+}
+
+// Fonction pour mettre à jour la quantité d'un article
+function updateQuantity(productId, productColor, newQuantity) {
+  const item = cart.find(item => item.id === productId && item.color === productColor);
+  if (item) {
+    if (newQuantity <= 0) {
+      removeFromCart(productId, productColor);
+    } else {
+      item.quantity = newQuantity;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartBadge();
+    }
+  }
+  return cart;
+}
+
+// Exporter les fonctions pour les utiliser dans les pages produits
+window.addToCart = addToCart;
+window.updateCartBadge = updateCartBadge;
+window.getCart = getCart;
+window.clearCart = clearCart;
+window.removeFromCart = removeFromCart;
+window.updateQuantity = updateQuantity;
+
+// Initialisation
+updateCartBadge();
+</script>
+</body>
+</html>
