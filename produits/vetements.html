@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vêtements Enfants - NIFEMI STORE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --primary: #1a2c3e; --accent: #b87c4f; --accent-dark: #9b623d; --white: #faf9f8; --gray-light: #f5f3f0; --gray: #6c757d; --shadow: 0 10px 30px rgba(0,0,0,0.05); --shadow-hover: 0 20px 40px rgba(0,0,0,0.1); --transition: all 0.3s ease; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); }
+    .container { width: 90%; max-width: 1280px; margin: 0 auto; }
+    
+    .header { position: fixed; top: 0; width: 100%; background: var(--white); padding: 20px 0; z-index: 1000; box-shadow: var(--shadow); transition: var(--transition); }
+    .header-scrolled { padding: 12px 0; }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; }
+    .logo-classic { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-badge { background: var(--primary); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: baseline; justify-content: center; gap: 2px; padding-top: 12px; }
+    .big-n { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 800; color: var(--accent); }
+    .small-s { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; color: var(--accent); align-self: flex-end; margin-bottom: 4px; }
+    .logo-text { display: flex; flex-direction: column; }
+    .brand-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--primary); }
+    .brand-store { font-size: 9px; font-weight: 600; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; }
+    
+    .menu-toggle { display: block; cursor: pointer; z-index: 1001; }
+    .menu-toggle span { display: block; width: 28px; height: 2px; background: var(--primary); margin: 6px 0; transition: var(--transition); }
+    .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(8px, -8px); }
+    
+    .nav-menu { position: fixed; top: 0; right: -100%; width: 80%; max-width: 350px; height: 100vh; background: var(--white); padding: 100px 40px; transition: 0.4s ease; z-index: 999; box-shadow: -5px 0 30px rgba(0,0,0,0.1); }
+    .nav-menu.active { right: 0; }
+    .nav-list { list-style: none; }
+    .nav-list li { margin-bottom: 30px; }
+    .nav-link { text-decoration: none; color: var(--primary); font-size: 22px; font-weight: 500; transition: var(--transition); display: inline-block; }
+    .nav-link:hover { color: var(--accent); transform: translateX(8px); }
+    .nav-commande { background: var(--accent); color: white !important; padding: 12px 28px; border-radius: 40px; }
+    
+    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 998; opacity: 0; visibility: hidden; transition: 0.3s; }
+    .overlay.active { opacity: 1; visibility: visible; }
+    
+    .cart-float { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
+    .cart-icon { display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: var(--accent); border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-decoration: none; position: relative; }
+    .cart-icon i { font-size: 28px; color: white; }
+    .cart-badge { position: absolute; top: -5px; right: -5px; background: #2196F3; color: white; font-size: 12px; font-weight: bold; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    
+    .page-produits { padding: 120px 0 60px; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: 42px; color: var(--primary); text-align: center; margin-bottom: 15px; }
+    .page-subtitle { text-align: center; color: var(--gray); margin-bottom: 50px; font-size: 18px; }
+    
+    .modeles-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
+    .modele-card { background: var(--gray-light); border-radius: 20px; padding: 20px; cursor: pointer; text-align: center; transition: var(--transition); }
+    .modele-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+    .modele-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 12px; }
+    .modele-card h3 { font-size: 16px; color: var(--primary); margin-bottom: 5px; }
+    .modele-card .prix { font-size: 14px; font-weight: 600; color: var(--accent); }
+    
+    .produit-grand { display: none; gap: 50px; background: var(--gray-light); border-radius: 30px; padding: 40px; align-items: center; margin-top: 50px; animation: fadeIn 0.5s ease; }
+    .produit-grand.visible { display: flex; }
+    .produit-grand-image { flex: 1; text-align: center; }
+    .produit-grand-image img { max-width: 100%; border-radius: 20px; box-shadow: var(--shadow-hover); }
+    .produit-grand-info { flex: 1; }
+    .produit-grand-info h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--primary); margin-bottom: 15px; }
+    .produit-grand-info .prix { font-size: 28px; font-weight: 700; color: var(--accent); margin-bottom: 20px; }
+    .produit-grand-info .description { color: var(--gray); margin-bottom: 30px; line-height: 1.8; }
+    .detail-buttons { display: flex; gap: 20px; flex-wrap: wrap; }
+    .btn-add { background: var(--accent); color: white; padding: 14px 35px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; transition: var(--transition); }
+    .btn-add:hover { background: var(--accent-dark); transform: translateY(-2px); }
+    .btn-continue { background: transparent; color: var(--primary); padding: 14px 35px; border-radius: 50px; text-decoration: none; font-weight: 600; border: 2px solid var(--primary); transition: var(--transition); cursor: pointer; }
+    .btn-continue:hover { background: var(--primary); color: white; }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .toast-message { position: fixed; bottom: 100px; right: 30px; background: var(--accent); color: white; padding: 12px 24px; border-radius: 50px; z-index: 1001; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+    .toast-message.show { opacity: 1; }
+    
+    @media (min-width: 992px) { .menu-toggle { display: none; } .nav-menu { position: static; width: auto; height: auto; background: transparent; padding: 0; box-shadow: none; } .nav-list { display: flex; gap: 40px; align-items: center; } .nav-list li { margin-bottom: 0; } .nav-link { font-size: 16px; } .nav-commande { padding: 10px 24px; } }
+    @media (max-width: 992px) { .modeles-grid { grid-template-columns: repeat(3, 1fr); } .produit-grand { flex-direction: column; text-align: center; } }
+    @media (max-width: 768px) { .modeles-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .modeles-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="../index.html" class="logo-classic">
+        <div class="logo-badge"><span class="big-n">N</span><span class="small-s">s</span></div>
+        <div class="logo-text"><span class="brand-name">NIFEMI</span><span class="brand-store">STORE</span></div>
+      </a>
+
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-list">
+          <li><a href="../index.html" class="nav-link">Accueil</a></li>
+          <li><a href="../index.html#produits" class="nav-link">Produits</a></li>
+          <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="page-produits">
+  <div class="container">
+    <h1 class="page-title">Toute la collection Vêtements Enfants</h1>
+    <p class="page-subtitle">Des vêtements confortables et stylés pour vos enfants</p>
+    
+    <div class="modeles-grid" id="modelesGrid"></div>
+    
+    <div class="produit-grand" id="produitGrand">
+      <div class="produit-grand-image"><img id="grandImage" src="" alt="Vêtement enfant"></div>
+      <div class="produit-grand-info">
+        <h2 id="grandNom"></h2>
+        <div class="prix" id="grandPrix"></div>
+        <p class="description" id="grandDescription"></p>
+        <div class="detail-buttons">
+          <button class="btn-add" id="btnAjouterPanier">➕ Ajouter au panier</button>
+          <button class="btn-continue" id="btnContinuerChoix">🔄 Continuer les choix</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="cart-float"><a href="../panier.html" class="cart-icon"><i class="fas fa-shopping-cart"></i><span class="cart-badge" id="cartBadge">0</span></a></div>
+<div class="toast-message" id="toastMessage">✓ Ajouté au panier !</div>
+
+<script>
+  const vetements = [
+    { id: 1, nom: "Vêtement Enfant Marron", couleur: "Marron", image: "vetement-marron.jpg", prix: 5000, description: "Vêtement confortable en tissu doux. Idéal pour le quotidien." },
+    { id: 2, nom: "Vêtement Enfant Noir", couleur: "Noir", image: "vetement-noir.jpg", prix: 5000, description: "Vêtement élégant en noir. Parfait pour les occasions spéciales." },
+    { id: 3, nom: "Vêtement Enfant Beige", couleur: "Beige", image: "vetement-beige.jpg", prix: 5000, description: "Vêtement beige, doux et confortable." },
+    { id: 4, nom: "Ensemble Vert Imprimé", couleur: "Vert", image: "vetement-vert.jpg", prix: 5000, description: "Ensemble vert imprimé avec T-shirt blanc ou noir et short vert." }
+  ];
+  
+  let currentProduct = null;
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+  const modelesGrid = document.getElementById('modelesGrid');
+  const produitGrand = document.getElementById('produitGrand');
+  const grandImage = document.getElementById('grandImage');
+  const grandNom = document.getElementById('grandNom');
+  const grandPrix = document.getElementById('grandPrix');
+  const grandDescription = document.getElementById('grandDescription');
+  const btnAjouterPanier = document.getElementById('btnAjouterPanier');
+  const btnContinuerChoix = document.getElementById('btnContinuerChoix');
+  
+  function updateCartBadge() {
+    const total = cart.reduce((s, i) => s + i.quantity, 0);
+    const badge = document.getElementById('cartBadge');
+    if (badge) badge.textContent = total;
+  }
+  
+  function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartBadge();
+  }
+  
+  function addToCart(product) {
+    const existing = cart.find(item => item.id === `vetement-${product.id}`);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({
+        id: `vetement-${product.id}`,
+        name: product.nom,
+        price: product.prix,
+        color: product.couleur,
+        image: `images/vetements/${product.image}`,
+        quantity: 1
+      });
+    }
+    saveCart();
+    const toast = document.getElementById('toastMessage');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  }
+  
+  function showProductDetail(product) {
+    currentProduct = product;
+    grandImage.src = `../images/vetements/${product.image}`;
+    grandNom.textContent = product.nom;
+    grandPrix.textContent = `${product.prix.toLocaleString()} FCFA`;
+    grandDescription.textContent = product.description;
+    produitGrand.classList.add('visible');
+    produitGrand.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  
+  function hideProductDetail() {
+    produitGrand.classList.remove('visible');
+    currentProduct = null;
+  }
+  
+  function generateModelesGrid() {
+    modelesGrid.innerHTML = '';
+    vetements.forEach(v => {
+      const card = document.createElement('div');
+      card.className = 'modele-card';
+      card.onclick = () => showProductDetail(v);
+      card.innerHTML = `
+        <img src="../images/vetements/${v.image}" alt="${v.nom}" onerror="this.src='../images/placeholder.png'">
+        <h3>${v.nom}</h3>
+        <div class="prix">${v.prix.toLocaleString()} FCFA</div>
+      `;
+      modelesGrid.appendChild(card);
+    });
+  }
+  
+  btnAjouterPanier.addEventListener('click', () => {
+    if (currentProduct) addToCart(currentProduct);
+  });
+  
+  btnContinuerChoix.addEventListener('click', hideProductDetail);
+  
+  // ================= MENU BURGER AVEC OVERLAY =================
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
+  const overlay = document.createElement('div');
+  overlay.className = 'overlay';
+  document.body.appendChild(overlay);
+  
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      overlay.classList.toggle('active');
+      document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+    });
+    
+    overlay.addEventListener('click', function() {
+      menuToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function() {
+        menuToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+  
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 50) header.classList.add('header-scrolled');
+    else header.classList.remove('header-scrolled');
+  });
+  
+  generateModelesGrid();
+  updateCartBadge();
+</script>
+
+</body>
+</html>
