@@ -279,12 +279,13 @@
 /* ================= HERO ================= */
 .hero {
   position: relative;
-  min-height: calc(100vh - 80px);  /* Hauteur = écran - header */
-  margin-top: 80px;  /* Décale le contenu sous le header */
+  width: 100%;           /* Force la largeur à 100% de l'écran */
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow-x: hidden;    /* Cache ce qui dépasse horizontalement */
+  margin-top: 80px;
 }
 
 .hero-bg-image {
@@ -299,8 +300,7 @@
   background-position: center;
   background-repeat: no-repeat;
   z-index: 0;
-}
-    
+}    
 .hero-overlay {
   position: absolute;
   top: 0;
